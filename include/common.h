@@ -56,11 +56,11 @@ struct AudioSample {
 
 // Capture settings
 struct CaptureSettings {
-    // Video settings
+    // Video settings - optimized defaults
     int width = 1920;
     int height = 1080;
     int frameRate = 30;
-    int videoBitrate = 5000000; // in bps
+    int videoBitrate = 6000000; // 6 Mbps - balanced quality/size
     std::string videoCodec = "H.264";
     Quality quality = Quality::HIGH;
     bool capture_cursor = true;
@@ -77,8 +77,8 @@ struct CaptureSettings {
     std::string filenameFormat = "PlayRec_%Y%m%d_%H%M%S";
     std::string output_path = "capture.mp4";
     
-    // Legacy compatibility
-    int target_fps = 60;
+    // Legacy compatibility - synchronized with encoder
+    int target_fps = 30;  // Match encoder framerate setting
     std::string codec = "h264";
 };
 

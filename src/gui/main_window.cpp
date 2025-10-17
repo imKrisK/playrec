@@ -10,6 +10,12 @@
 #include <QtCore/QStandardPaths>
 #include <QtCore/QSettings>
 #include <QtCore/QDateTime>
+#include <QtCore/QDir>
+#include <QtCore/QDirIterator>
+#include <QtCore/QFileInfo>
+#include <QtGui/QDesktopServices>
+#include <QtCore/QUrl>
+#include <algorithm>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -50,6 +56,12 @@ MainWindow::MainWindow(QWidget *parent)
     , m_isPaused(false)
     , m_outputFilePath("gameplay_capture.mp4")
     , m_settings(std::make_unique<playrec::CaptureSettings>())
+    , m_mediaPlayer(nullptr)
+    , m_videoWidget(nullptr)
+    , m_pauseVideoButton(nullptr)
+    , m_playbackTimeLabel(nullptr)
+    , m_playbackSlider(nullptr)
+    , m_isPlayingVideo(false)
 {
     setWindowTitle("PlayRec - Game Capture Application");
     setMinimumSize(1200, 800);
@@ -63,14 +75,18 @@ MainWindow::MainWindow(QWidget *parent)
     m_settings->output_path = m_outputFilePath.toStdString();
     
     setupUI();
-    setupMenuBar();
+    createMenus();
     setupStatusBar();
+    setupVideoPlayer();
     loadSettings();
     updateControls();
     
     // Create update timer
     m_updateTimer = new QTimer(this);
     connect(m_updateTimer, &QTimer::timeout, this, &MainWindow::onUpdateStats);
+    
+    // Initialize replay section after UI is fully set up (with delay)
+    QTimer::singleShot(100, this, &MainWindow::onRefreshRecordings);
     
     logMessage("PlayRec GUI initialized successfully");
 }
@@ -104,6 +120,7 @@ void MainWindow::setupCentralWidget()
     m_previewGroup = new QGroupBox("Preview");
     m_previewWidget = new PreviewWidget;
     m_previewWidget->setMinimumSize(640, 360);
+    m_previewWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     
     auto* previewLayout = new QVBoxLayout(m_previewGroup);
     
@@ -117,20 +134,25 @@ void MainWindow::setupCentralWidget()
     previewLayout->addLayout(previewControlsLayout);
     previewLayout->addWidget(m_previewWidget, 1);
     
+    // Add video widget for replay (initially hidden)
+    // We'll show this when playing videos and hide the preview widget
+    // Note: Video widget will be added to the same layout but controlled via show/hide
+    
     m_mainSplitter->addWidget(m_previewGroup);
     
-    // Right side - Controls, Settings, Stats, Log
+    // Right side - Controls, Replay, Stats, Log
     m_rightSplitter = new QSplitter(Qt::Vertical);
     
     setupControlsPanel();
+    setupReplayPanel();
     setupStatsPanel();
     setupLogPanel();
     
     m_mainSplitter->addWidget(m_rightSplitter);
     
     // Set splitter proportions
-    m_mainSplitter->setSizes({800, 400});
-    m_rightSplitter->setSizes({200, 150, 150});
+    m_mainSplitter->setSizes({900, 400});  // Give more space to preview/video area
+    m_rightSplitter->setSizes({160, 120, 140, 120, 100});  // Controls, QuickSettings, Replay, Stats, Log
     
     // Connect signals
     connect(m_previewCheckBox, &QCheckBox::toggled, this, &MainWindow::onPreviewToggle);
@@ -244,32 +266,56 @@ void MainWindow::setupLogPanel()
     m_logTextEdit = new QTextEdit;
     m_logTextEdit->setMaximumHeight(120);
     m_logTextEdit->setReadOnly(true);
-    m_logTextEdit->setFont(QFont("Consolas", 9));
+    
+    // Use monospace font with fallbacks for better cross-platform support
+    QFont monoFont;
+    monoFont.setFamilies({"Monaco", "Courier New", "monospace"});
+    monoFont.setPointSize(9);
+    m_logTextEdit->setFont(monoFont);
     
     logLayout->addWidget(m_logTextEdit);
     
     m_rightSplitter->addWidget(m_logGroup);
 }
 
-void MainWindow::setupMenuBar()
+void MainWindow::createMenus()
 {
     auto* fileMenu = menuBar()->addMenu("&File");
-    fileMenu->addAction("&New Recording", this, &MainWindow::onStartRecording, QKeySequence::New);
-    fileMenu->addAction("&Stop Recording", this, &MainWindow::onStopRecording, QKeySequence("Ctrl+S"));
+    
+    // Modern Qt6 syntax for addAction
+    auto* newRecordingAction = new QAction("&New Recording", this);
+    newRecordingAction->setShortcut(QKeySequence::New);
+    connect(newRecordingAction, &QAction::triggered, this, &MainWindow::onStartRecording);
+    fileMenu->addAction(newRecordingAction);
+    
+    auto* stopRecordingAction = new QAction("&Stop Recording", this);
+    stopRecordingAction->setShortcut(QKeySequence("Ctrl+S"));
+    connect(stopRecordingAction, &QAction::triggered, this, &MainWindow::onStopRecording);
+    fileMenu->addAction(stopRecordingAction);
+    
     fileMenu->addSeparator();
-    fileMenu->addAction("E&xit", this, &QWidget::close, QKeySequence::Quit);
+    
+    auto* exitAction = new QAction("E&xit", this);
+    exitAction->setShortcut(QKeySequence::Quit);
+    connect(exitAction, &QAction::triggered, this, &QWidget::close);
+    fileMenu->addAction(exitAction);
     
     auto* settingsMenu = menuBar()->addMenu("&Settings");
-    settingsMenu->addAction("&Preferences...", this, &MainWindow::onSettings, QKeySequence::Preferences);
+    auto* preferencesAction = new QAction("&Preferences...", this);
+    preferencesAction->setShortcut(QKeySequence::Preferences);
+    connect(preferencesAction, &QAction::triggered, this, &MainWindow::onSettings);
+    settingsMenu->addAction(preferencesAction);
     
     auto* helpMenu = menuBar()->addMenu("&Help");
-    helpMenu->addAction("&About", [this]() {
+    auto* aboutAction = new QAction("&About", this);
+    connect(aboutAction, &QAction::triggered, this, [this]() {
         QMessageBox::about(this, "About PlayRec", 
-            "PlayRec v1.0.0\\n\\n"
-            "Professional game capture application\\n"
-            "Built with C++ and Qt\\n\\n"
+            "PlayRec v1.0.0\n\n"
+            "Professional game capture application\n"
+            "Built with C++ and Qt6\n\n"
             "© 2024 PlayRec Team");
     });
+    helpMenu->addAction(aboutAction);
 }
 
 void MainWindow::setupStatusBar()
@@ -286,6 +332,11 @@ void MainWindow::setupStatusBar()
 void MainWindow::onStartRecording()
 {
     if (m_isRecording) return;
+    
+    // Stop any video playback first
+    if (m_isPlayingVideo) {
+        onStopPlayback();
+    }
     
     updateSettings();
     
@@ -414,10 +465,18 @@ void MainWindow::onFrameCaptured(const QImage& frame)
 
 void MainWindow::updateControls()
 {
-    m_startButton->setEnabled(!m_isRecording);
+    bool canRecord = !m_isRecording && !m_isPlayingVideo;
+    bool canPlayVideo = !m_isRecording;
+    
+    m_startButton->setEnabled(canRecord);
     m_stopButton->setEnabled(m_isRecording);
     m_pauseButton->setEnabled(m_isRecording);
     m_pauseButton->setText(m_isPaused ? "Resume" : "Pause");
+    
+    // Replay controls
+    m_playButton->setEnabled(canPlayVideo && !m_recordingsComboBox->currentData().toString().isEmpty());
+    m_pauseVideoButton->setEnabled(m_isPlayingVideo);
+    m_stopPlaybackButton->setEnabled(m_isPlayingVideo);
     
     // Update quick settings from current settings
     m_codecCombo->setCurrentText(QString::fromStdString(m_settings->codec) == "h264" ? "H.264 (x264)" : "H.265 (x265)");
@@ -454,7 +513,7 @@ void MainWindow::loadSettings()
 {
     QSettings settings;
     m_outputFilePath = settings.value("outputPath", "gameplay_capture.mp4").toString();
-    m_settings->target_fps = settings.value("fps", 60).toInt();
+    m_settings->target_fps = settings.value("fps", 30).toInt();  // Match framerate sync
     m_settings->codec = settings.value("codec", "h264").toString().toStdString();
     m_settings->capture_audio = settings.value("audio", true).toBool();
     
@@ -470,11 +529,362 @@ void MainWindow::saveSettings()
     settings.setValue("audio", m_settings->capture_audio);
 }
 
+void MainWindow::setupReplayPanel()
+{
+    m_replayGroup = new QGroupBox("Replay Recordings");
+    auto* replayLayout = new QVBoxLayout(m_replayGroup);
+    
+    // Recording selection
+    auto* selectionLayout = new QHBoxLayout;
+    selectionLayout->addWidget(new QLabel("Recording:"));
+    m_recordingsComboBox = new QComboBox;
+    m_recordingsComboBox->setMinimumWidth(200);
+    m_refreshRecordingsButton = new QPushButton("↻");
+    m_refreshRecordingsButton->setMaximumWidth(30);
+    m_refreshRecordingsButton->setToolTip("Refresh recordings list");
+    
+    selectionLayout->addWidget(m_recordingsComboBox, 1);
+    selectionLayout->addWidget(m_refreshRecordingsButton);
+    replayLayout->addLayout(selectionLayout);
+    
+    // Current recording info
+    m_currentRecordingLabel = new QLabel("No recording selected");
+    m_currentRecordingLabel->setStyleSheet("QLabel { color: #666; font-style: italic; }");
+    replayLayout->addWidget(m_currentRecordingLabel);
+    
+    // Playback controls
+    auto* playbackLayout = new QHBoxLayout;
+    m_playButton = new QPushButton("▶ Play");
+    m_playButton->setStyleSheet("QPushButton { background-color: #007bff; color: white; font-weight: bold; padding: 6px 12px; }");
+    m_pauseVideoButton = new QPushButton("⏸ Pause");
+    m_pauseVideoButton->setStyleSheet("QPushButton { background-color: #ffc107; color: black; font-weight: bold; padding: 6px 12px; }");
+    m_stopPlaybackButton = new QPushButton("⏹ Stop");
+    m_stopPlaybackButton->setStyleSheet("QPushButton { background-color: #6c757d; color: white; font-weight: bold; padding: 6px 12px; }");
+    m_browseRecordingButton = new QPushButton("📁 Browse...");
+    
+    playbackLayout->addWidget(m_playButton);
+    playbackLayout->addWidget(m_pauseVideoButton);
+    playbackLayout->addWidget(m_stopPlaybackButton);
+    playbackLayout->addWidget(m_browseRecordingButton);
+    replayLayout->addLayout(playbackLayout);
+    
+    // Video playback timeline
+    auto* timelineLayout = new QHBoxLayout;
+    m_playbackTimeLabel = new QLabel("00:00 / 00:00");
+    m_playbackSlider = new QSlider(Qt::Horizontal);
+    m_playbackSlider->setEnabled(false);
+    
+    timelineLayout->addWidget(m_playbackTimeLabel);
+    timelineLayout->addWidget(m_playbackSlider, 1);
+    replayLayout->addLayout(timelineLayout);
+    
+    m_rightSplitter->addWidget(m_replayGroup);
+    
+    // Connect signals
+    connect(m_playButton, &QPushButton::clicked, this, &MainWindow::onPlayRecording);
+    connect(m_pauseVideoButton, &QPushButton::clicked, this, &MainWindow::onPauseVideo);
+    connect(m_stopPlaybackButton, &QPushButton::clicked, this, &MainWindow::onStopPlayback);
+    connect(m_browseRecordingButton, &QPushButton::clicked, this, &MainWindow::onSelectRecordingFile);
+    connect(m_refreshRecordingsButton, &QPushButton::clicked, this, &MainWindow::onRefreshRecordings);
+    connect(m_playbackSlider, &QSlider::sliderMoved, this, &MainWindow::onSeekVideo);
+    connect(m_recordingsComboBox, QOverload<int>::of(&QComboBox::currentIndexChanged), 
+            this, [this]() { 
+                updateCurrentRecordingInfo();
+                // Show preview of selected recording
+                QString selectedFile = m_recordingsComboBox->currentData().toString();
+                if (!selectedFile.isEmpty()) {
+                    loadRecordingPreview(selectedFile);
+                }
+            });
+    
+    // Note: onRefreshRecordings() will be called after full UI initialization
+}
+
+void MainWindow::onPlayRecording()
+{
+    QString selectedFile = m_recordingsComboBox->currentData().toString();
+    if (selectedFile.isEmpty()) {
+        logMessage("No recording selected for playback");
+        return;
+    }
+    
+    logMessage(QString("Playing recording: %1").arg(selectedFile));
+    
+    // Switch to video mode and start playback
+    switchToVideoMode();
+    
+    // Load and play the video
+    m_mediaPlayer->setSource(QUrl::fromLocalFile(selectedFile));
+    m_mediaPlayer->play();
+    m_isPlayingVideo = true;
+    
+    // Update UI state
+    m_playButton->setText("⏸ Playing...");
+    m_playButton->setEnabled(false);
+    m_pauseVideoButton->setEnabled(true);
+    m_stopPlaybackButton->setEnabled(true);
+    m_playbackSlider->setEnabled(true);
+    
+    // Ensure proper video widget sizing
+    m_videoWidget->updateGeometry();
+}
+
+void MainWindow::onStopPlayback()
+{
+    if (m_isPlayingVideo) {
+        m_mediaPlayer->stop();
+        switchToPreviewMode();
+        m_isPlayingVideo = false;
+        
+        // Reset UI state
+        m_playButton->setText("▶ Play");
+        m_playButton->setEnabled(true);
+        m_pauseVideoButton->setEnabled(false);
+        m_stopPlaybackButton->setEnabled(false);
+        m_playbackSlider->setEnabled(false);
+        m_playbackSlider->setValue(0);
+        m_playbackTimeLabel->setText("00:00 / 00:00");
+        
+        logMessage("Video playback stopped");
+    }
+}
+
+void MainWindow::onPauseVideo()
+{
+    if (m_isPlayingVideo) {
+        if (m_mediaPlayer->playbackState() == QMediaPlayer::PlayingState) {
+            m_mediaPlayer->pause();
+            m_pauseVideoButton->setText("▶ Resume");
+            logMessage("Video paused");
+        } else {
+            m_mediaPlayer->play();
+            m_pauseVideoButton->setText("⏸ Pause");
+            logMessage("Video resumed");
+        }
+    }
+}
+
+void MainWindow::onVideoPositionChanged(qint64 position)
+{
+    if (!m_playbackSlider->isSliderDown()) {
+        m_playbackSlider->setValue(static_cast<int>(position));
+    }
+    
+    // Update time label
+    int seconds = static_cast<int>(position / 1000);
+    int minutes = seconds / 60;
+    seconds = seconds % 60;
+    
+    int totalSeconds = static_cast<int>(m_mediaPlayer->duration() / 1000);
+    int totalMinutes = totalSeconds / 60;
+    totalSeconds = totalSeconds % 60;
+    
+    QString timeText = QString("%1:%2 / %3:%4")
+        .arg(minutes, 2, 10, QChar('0'))
+        .arg(seconds, 2, 10, QChar('0'))
+        .arg(totalMinutes, 2, 10, QChar('0'))
+        .arg(totalSeconds, 2, 10, QChar('0'));
+    
+    m_playbackTimeLabel->setText(timeText);
+}
+
+void MainWindow::onVideoDurationChanged(qint64 duration)
+{
+    m_playbackSlider->setRange(0, static_cast<int>(duration));
+}
+
+void MainWindow::onVideoStateChanged(QMediaPlayer::PlaybackState state)
+{
+    switch (state) {
+        case QMediaPlayer::PlayingState:
+            m_pauseVideoButton->setText("⏸ Pause");
+            break;
+        case QMediaPlayer::PausedState:
+            m_pauseVideoButton->setText("▶ Resume");
+            break;
+        case QMediaPlayer::StoppedState:
+            m_pauseVideoButton->setText("⏸ Pause");
+            break;
+    }
+}
+
+void MainWindow::onSeekVideo(int position)
+{
+    m_mediaPlayer->setPosition(position);
+}
+
+void MainWindow::switchToVideoMode()
+{
+    // Hide preview widget and show video widget
+    m_previewWidget->hide();
+    m_videoWidget->show();
+    logMessage("Switched to video playback mode");
+}
+
+void MainWindow::switchToPreviewMode()
+{
+    // Hide video widget and show preview widget
+    m_videoWidget->hide();
+    m_previewWidget->show();
+    logMessage("Switched to preview mode");
+}
+
+void MainWindow::onSelectRecordingFile()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+        "Select Recording to Play", 
+        QDir::currentPath(),
+        "Video Files (*.mp4 *.avi *.mkv *.mov);;All Files (*)");
+    
+    if (!fileName.isEmpty()) {
+        // Add to combo box if not already there
+        bool found = false;
+        for (int i = 0; i < m_recordingsComboBox->count(); ++i) {
+            if (m_recordingsComboBox->itemData(i).toString() == fileName) {
+                m_recordingsComboBox->setCurrentIndex(i);
+                found = true;
+                break;
+            }
+        }
+        
+        if (!found) {
+            QFileInfo fileInfo(fileName);
+            m_recordingsComboBox->addItem(fileInfo.fileName(), fileName);
+            m_recordingsComboBox->setCurrentIndex(m_recordingsComboBox->count() - 1);
+        }
+        
+        updateCurrentRecordingInfo();
+        logMessage("Selected recording: " + QFileInfo(fileName).fileName());
+    }
+}
+
+void MainWindow::onRefreshRecordings()
+{
+    if (!m_recordingsComboBox) {
+        return; // UI not fully initialized yet
+    }
+    
+    m_recordingsComboBox->clear();
+    
+    // Find MP4 files in current directory and subdirectories
+    QStringList recordings;
+    QDirIterator it(".", QStringList() << "*.mp4", QDir::Files, QDirIterator::Subdirectories);
+    
+    while (it.hasNext()) {
+        QString filePath = it.next();
+        QFileInfo fileInfo(filePath);
+        
+        // Skip very small files (likely incomplete)
+        if (fileInfo.size() > 1024) {
+            // Store absolute path for reliable playback
+            recordings << fileInfo.absoluteFilePath();
+        }
+    }
+    
+    // Sort by modification time (newest first)
+    std::sort(recordings.begin(), recordings.end(), [](const QString& a, const QString& b) {
+        return QFileInfo(a).lastModified() > QFileInfo(b).lastModified();
+    });
+    
+    // Add to combo box
+    for (const QString& recording : recordings) {
+        QFileInfo fileInfo(recording);
+        QString displayName = QString("%1 (%2)")
+            .arg(fileInfo.fileName())
+            .arg(fileInfo.lastModified().toString("yyyy-MM-dd hh:mm"));
+        m_recordingsComboBox->addItem(displayName, recording);
+    }
+    
+    if (recordings.isEmpty()) {
+        m_recordingsComboBox->addItem("No recordings found", "");
+        m_currentRecordingLabel->setText("No recordings available");
+    } else {
+        updateCurrentRecordingInfo();
+        logMessage(QString("Found %1 recordings").arg(recordings.size()));
+    }
+}
+
+void MainWindow::updateCurrentRecordingInfo()
+{
+    QString selectedFile = m_recordingsComboBox->currentData().toString();
+    if (selectedFile.isEmpty()) {
+        m_currentRecordingLabel->setText("No recording selected");
+        return;
+    }
+    
+    QFileInfo fileInfo(selectedFile);
+    QString info = QString("Size: %1 MB, Modified: %2")
+        .arg(fileInfo.size() / (1024.0 * 1024.0), 0, 'f', 1)
+        .arg(fileInfo.lastModified().toString("yyyy-MM-dd hh:mm"));
+    
+    m_currentRecordingLabel->setText(info);
+}
+
+void MainWindow::loadRecordingPreview(const QString& filePath)
+{
+    // For now, show a placeholder indicating a recording is selected
+    // In a full implementation, this would extract a frame from the video file
+    QImage previewImage(640, 360, QImage::Format_RGB32);
+    previewImage.fill(QColor(40, 40, 60));
+    
+    // Draw some text to indicate this is a recording preview
+    QPainter painter(&previewImage);
+    painter.setPen(Qt::white);
+    QFont font;
+    font.setPointSize(16);
+    painter.setFont(font);
+    
+    QFileInfo fileInfo(filePath);
+    QString text = QString("Recording Preview\n%1\n\nSize: %2 MB\nClick Play to open in video player")
+        .arg(fileInfo.fileName())
+        .arg(fileInfo.size() / (1024.0 * 1024.0), 0, 'f', 1);
+    
+    painter.drawText(previewImage.rect(), Qt::AlignCenter, text);
+    
+    // Set this preview in the preview widget
+    m_previewWidget->setFrame(previewImage);
+    
+    logMessage("Loaded preview for: " + fileInfo.fileName());
+}
+
+void MainWindow::setupVideoPlayer()
+{
+    // Create media player
+    m_mediaPlayer = new QMediaPlayer(this);
+    m_videoWidget = new QVideoWidget(this);
+    
+    // Set video widget size constraints to match preview widget
+    m_videoWidget->setMinimumSize(640, 360);
+    m_videoWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    m_videoWidget->setAspectRatioMode(Qt::KeepAspectRatio);
+    
+    // Set a preferred size for better display quality
+    m_videoWidget->resize(800, 450);  // 16:9 aspect ratio
+    
+    // Set up video output
+    m_mediaPlayer->setVideoOutput(m_videoWidget);
+    
+    // Add video widget to the preview layout now (but keep it hidden initially)
+    auto* previewLayout = qobject_cast<QVBoxLayout*>(m_previewGroup->layout());
+    if (previewLayout) {
+        previewLayout->addWidget(m_videoWidget, 1);
+    }
+    
+    // Initially hide the video widget (we start in preview mode)
+    m_videoWidget->hide();
+    
+    // Set aspect ratio mode to keep video proportions
+    m_videoWidget->setAspectRatioMode(Qt::KeepAspectRatio);
+    
+    // Connect media player signals
+    connect(m_mediaPlayer, &QMediaPlayer::positionChanged, this, &MainWindow::onVideoPositionChanged);
+    connect(m_mediaPlayer, &QMediaPlayer::durationChanged, this, &MainWindow::onVideoDurationChanged);
+    connect(m_mediaPlayer, &QMediaPlayer::playbackStateChanged, this, &MainWindow::onVideoStateChanged);
+}
+
 void MainWindow::logMessage(const QString& message)
 {
     QString timestamp = QDateTime::currentDateTime().toString("hh:mm:ss");
     QString logEntry = QString("[%1] %2").arg(timestamp, message);
     m_logTextEdit->append(logEntry);
 }
-
-#include "main_window.moc"

@@ -72,7 +72,10 @@ void PreviewWidget::paintEvent(QPaintEvent* event)
     if (!m_previewEnabled) {
         // Draw disabled message
         painter.setPen(QColor(128, 128, 128));
-        painter.setFont(QFont("Arial", 14));
+        QFont uiFont;
+        uiFont.setFamilies({"SF Pro Display", "Segoe UI", "Arial", "sans-serif"});
+        uiFont.setPointSize(14);
+        painter.setFont(uiFont);
         painter.drawText(rect, Qt::AlignCenter, m_disabledText);
         return;
     }
@@ -82,7 +85,10 @@ void PreviewWidget::paintEvent(QPaintEvent* event)
     if (!m_hasFrame || m_scaledPixmap.isNull()) {
         // Draw no preview message
         painter.setPen(QColor(128, 128, 128));
-        painter.setFont(QFont("Arial", 14));
+        QFont uiFont;
+        uiFont.setFamilies({"SF Pro Display", "Segoe UI", "Arial", "sans-serif"});
+        uiFont.setPointSize(14);
+        painter.setFont(uiFont);
         painter.drawText(rect, Qt::AlignCenter, m_noPreviewText);
         return;
     }

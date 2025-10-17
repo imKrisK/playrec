@@ -162,6 +162,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named PlayRec-gui
+
+# Build rule for target.
+PlayRec-gui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PlayRec-gui
+.PHONY : PlayRec-gui
+
+# fast build rule for target.
+PlayRec-gui/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/build
+.PHONY : PlayRec-gui/fast
+
+#=============================================================================
 # Target rules for targets named PlayRec
 
 # Build rule for target.
@@ -174,11 +187,112 @@ PlayRec/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/build
 .PHONY : PlayRec/fast
 
+#=============================================================================
+# Target rules for targets named PlayRec-gui_autogen_timestamp_deps
+
+# Build rule for target.
+PlayRec-gui_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PlayRec-gui_autogen_timestamp_deps
+.PHONY : PlayRec-gui_autogen_timestamp_deps
+
+# fast build rule for target.
+PlayRec-gui_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui_autogen_timestamp_deps.dir/build.make CMakeFiles/PlayRec-gui_autogen_timestamp_deps.dir/build
+.PHONY : PlayRec-gui_autogen_timestamp_deps/fast
+
+#=============================================================================
+# Target rules for targets named PlayRec-gui_autogen
+
+# Build rule for target.
+PlayRec-gui_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PlayRec-gui_autogen
+.PHONY : PlayRec-gui_autogen
+
+# fast build rule for target.
+PlayRec-gui_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui_autogen.dir/build.make CMakeFiles/PlayRec-gui_autogen.dir/build
+.PHONY : PlayRec-gui_autogen/fast
+
+#=============================================================================
+# Target rules for targets named PlayRec_autogen_timestamp_deps
+
+# Build rule for target.
+PlayRec_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PlayRec_autogen_timestamp_deps
+.PHONY : PlayRec_autogen_timestamp_deps
+
+# fast build rule for target.
+PlayRec_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec_autogen_timestamp_deps.dir/build.make CMakeFiles/PlayRec_autogen_timestamp_deps.dir/build
+.PHONY : PlayRec_autogen_timestamp_deps/fast
+
+#=============================================================================
+# Target rules for targets named PlayRec_autogen
+
+# Build rule for target.
+PlayRec_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PlayRec_autogen
+.PHONY : PlayRec_autogen
+
+# fast build rule for target.
+PlayRec_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec_autogen.dir/build.make CMakeFiles/PlayRec_autogen.dir/build
+.PHONY : PlayRec_autogen/fast
+
+PlayRec-gui_autogen/mocs_compilation.o: PlayRec-gui_autogen/mocs_compilation.cpp.o
+.PHONY : PlayRec-gui_autogen/mocs_compilation.o
+
+# target to build an object file
+PlayRec-gui_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/PlayRec-gui_autogen/mocs_compilation.cpp.o
+.PHONY : PlayRec-gui_autogen/mocs_compilation.cpp.o
+
+PlayRec-gui_autogen/mocs_compilation.i: PlayRec-gui_autogen/mocs_compilation.cpp.i
+.PHONY : PlayRec-gui_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+PlayRec-gui_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/PlayRec-gui_autogen/mocs_compilation.cpp.i
+.PHONY : PlayRec-gui_autogen/mocs_compilation.cpp.i
+
+PlayRec-gui_autogen/mocs_compilation.s: PlayRec-gui_autogen/mocs_compilation.cpp.s
+.PHONY : PlayRec-gui_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+PlayRec-gui_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/PlayRec-gui_autogen/mocs_compilation.cpp.s
+.PHONY : PlayRec-gui_autogen/mocs_compilation.cpp.s
+
+PlayRec_autogen/mocs_compilation.o: PlayRec_autogen/mocs_compilation.cpp.o
+.PHONY : PlayRec_autogen/mocs_compilation.o
+
+# target to build an object file
+PlayRec_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o
+.PHONY : PlayRec_autogen/mocs_compilation.cpp.o
+
+PlayRec_autogen/mocs_compilation.i: PlayRec_autogen/mocs_compilation.cpp.i
+.PHONY : PlayRec_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+PlayRec_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.i
+.PHONY : PlayRec_autogen/mocs_compilation.cpp.i
+
+PlayRec_autogen/mocs_compilation.s: PlayRec_autogen/mocs_compilation.cpp.s
+.PHONY : PlayRec_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+PlayRec_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.s
+.PHONY : PlayRec_autogen/mocs_compilation.cpp.s
+
 src/audio_capture.o: src/audio_capture.cpp.o
 .PHONY : src/audio_capture.o
 
 # target to build an object file
 src/audio_capture.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/audio_capture.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o
 .PHONY : src/audio_capture.cpp.o
 
@@ -187,6 +301,7 @@ src/audio_capture.i: src/audio_capture.cpp.i
 
 # target to preprocess a source file
 src/audio_capture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/audio_capture.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/audio_capture.cpp.i
 .PHONY : src/audio_capture.cpp.i
 
@@ -195,6 +310,7 @@ src/audio_capture.s: src/audio_capture.cpp.s
 
 # target to generate assembly for a file
 src/audio_capture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/audio_capture.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/audio_capture.cpp.s
 .PHONY : src/audio_capture.cpp.s
 
@@ -203,6 +319,7 @@ src/capture_engine.o: src/capture_engine.cpp.o
 
 # target to build an object file
 src/capture_engine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/capture_engine.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o
 .PHONY : src/capture_engine.cpp.o
 
@@ -211,6 +328,7 @@ src/capture_engine.i: src/capture_engine.cpp.i
 
 # target to preprocess a source file
 src/capture_engine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/capture_engine.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/capture_engine.cpp.i
 .PHONY : src/capture_engine.cpp.i
 
@@ -219,6 +337,7 @@ src/capture_engine.s: src/capture_engine.cpp.s
 
 # target to generate assembly for a file
 src/capture_engine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/capture_engine.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/capture_engine.cpp.s
 .PHONY : src/capture_engine.cpp.s
 
@@ -227,6 +346,7 @@ src/encoder.o: src/encoder.cpp.o
 
 # target to build an object file
 src/encoder.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/encoder.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/encoder.cpp.o
 .PHONY : src/encoder.cpp.o
 
@@ -235,6 +355,7 @@ src/encoder.i: src/encoder.cpp.i
 
 # target to preprocess a source file
 src/encoder.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/encoder.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/encoder.cpp.i
 .PHONY : src/encoder.cpp.i
 
@@ -243,6 +364,7 @@ src/encoder.s: src/encoder.cpp.s
 
 # target to generate assembly for a file
 src/encoder.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/encoder.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/encoder.cpp.s
 .PHONY : src/encoder.cpp.s
 
@@ -251,6 +373,7 @@ src/file_writer.o: src/file_writer.cpp.o
 
 # target to build an object file
 src/file_writer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/file_writer.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/file_writer.cpp.o
 .PHONY : src/file_writer.cpp.o
 
@@ -259,6 +382,7 @@ src/file_writer.i: src/file_writer.cpp.i
 
 # target to preprocess a source file
 src/file_writer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/file_writer.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/file_writer.cpp.i
 .PHONY : src/file_writer.cpp.i
 
@@ -267,8 +391,129 @@ src/file_writer.s: src/file_writer.cpp.s
 
 # target to generate assembly for a file
 src/file_writer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/file_writer.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/file_writer.cpp.s
 .PHONY : src/file_writer.cpp.s
+
+src/gui/capture_thread.o: src/gui/capture_thread.cpp.o
+.PHONY : src/gui/capture_thread.o
+
+# target to build an object file
+src/gui/capture_thread.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/capture_thread.cpp.o
+.PHONY : src/gui/capture_thread.cpp.o
+
+src/gui/capture_thread.i: src/gui/capture_thread.cpp.i
+.PHONY : src/gui/capture_thread.i
+
+# target to preprocess a source file
+src/gui/capture_thread.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/capture_thread.cpp.i
+.PHONY : src/gui/capture_thread.cpp.i
+
+src/gui/capture_thread.s: src/gui/capture_thread.cpp.s
+.PHONY : src/gui/capture_thread.s
+
+# target to generate assembly for a file
+src/gui/capture_thread.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/capture_thread.cpp.s
+.PHONY : src/gui/capture_thread.cpp.s
+
+src/gui/main_gui.o: src/gui/main_gui.cpp.o
+.PHONY : src/gui/main_gui.o
+
+# target to build an object file
+src/gui/main_gui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/main_gui.cpp.o
+.PHONY : src/gui/main_gui.cpp.o
+
+src/gui/main_gui.i: src/gui/main_gui.cpp.i
+.PHONY : src/gui/main_gui.i
+
+# target to preprocess a source file
+src/gui/main_gui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/main_gui.cpp.i
+.PHONY : src/gui/main_gui.cpp.i
+
+src/gui/main_gui.s: src/gui/main_gui.cpp.s
+.PHONY : src/gui/main_gui.s
+
+# target to generate assembly for a file
+src/gui/main_gui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/main_gui.cpp.s
+.PHONY : src/gui/main_gui.cpp.s
+
+src/gui/main_window.o: src/gui/main_window.cpp.o
+.PHONY : src/gui/main_window.o
+
+# target to build an object file
+src/gui/main_window.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/main_window.cpp.o
+.PHONY : src/gui/main_window.cpp.o
+
+src/gui/main_window.i: src/gui/main_window.cpp.i
+.PHONY : src/gui/main_window.i
+
+# target to preprocess a source file
+src/gui/main_window.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/main_window.cpp.i
+.PHONY : src/gui/main_window.cpp.i
+
+src/gui/main_window.s: src/gui/main_window.cpp.s
+.PHONY : src/gui/main_window.s
+
+# target to generate assembly for a file
+src/gui/main_window.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/main_window.cpp.s
+.PHONY : src/gui/main_window.cpp.s
+
+src/gui/preview_widget.o: src/gui/preview_widget.cpp.o
+.PHONY : src/gui/preview_widget.o
+
+# target to build an object file
+src/gui/preview_widget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/preview_widget.cpp.o
+.PHONY : src/gui/preview_widget.cpp.o
+
+src/gui/preview_widget.i: src/gui/preview_widget.cpp.i
+.PHONY : src/gui/preview_widget.i
+
+# target to preprocess a source file
+src/gui/preview_widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/preview_widget.cpp.i
+.PHONY : src/gui/preview_widget.cpp.i
+
+src/gui/preview_widget.s: src/gui/preview_widget.cpp.s
+.PHONY : src/gui/preview_widget.s
+
+# target to generate assembly for a file
+src/gui/preview_widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/preview_widget.cpp.s
+.PHONY : src/gui/preview_widget.cpp.s
+
+src/gui/settings_dialog.o: src/gui/settings_dialog.cpp.o
+.PHONY : src/gui/settings_dialog.o
+
+# target to build an object file
+src/gui/settings_dialog.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/settings_dialog.cpp.o
+.PHONY : src/gui/settings_dialog.cpp.o
+
+src/gui/settings_dialog.i: src/gui/settings_dialog.cpp.i
+.PHONY : src/gui/settings_dialog.i
+
+# target to preprocess a source file
+src/gui/settings_dialog.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/settings_dialog.cpp.i
+.PHONY : src/gui/settings_dialog.cpp.i
+
+src/gui/settings_dialog.s: src/gui/settings_dialog.cpp.s
+.PHONY : src/gui/settings_dialog.s
+
+# target to generate assembly for a file
+src/gui/settings_dialog.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/gui/settings_dialog.cpp.s
+.PHONY : src/gui/settings_dialog.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
@@ -299,6 +544,7 @@ src/video_capture.o: src/video_capture.cpp.o
 
 # target to build an object file
 src/video_capture.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/video_capture.cpp.o
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/video_capture.cpp.o
 .PHONY : src/video_capture.cpp.o
 
@@ -307,6 +553,7 @@ src/video_capture.i: src/video_capture.cpp.i
 
 # target to preprocess a source file
 src/video_capture.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/video_capture.cpp.i
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/video_capture.cpp.i
 .PHONY : src/video_capture.cpp.i
 
@@ -315,6 +562,7 @@ src/video_capture.s: src/video_capture.cpp.s
 
 # target to generate assembly for a file
 src/video_capture.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec-gui.dir/build.make CMakeFiles/PlayRec-gui.dir/src/video_capture.cpp.s
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/PlayRec.dir/build.make CMakeFiles/PlayRec.dir/src/video_capture.cpp.s
 .PHONY : src/video_capture.cpp.s
 
@@ -330,7 +578,18 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... PlayRec-gui_autogen"
+	@echo "... PlayRec-gui_autogen_timestamp_deps"
+	@echo "... PlayRec_autogen"
+	@echo "... PlayRec_autogen_timestamp_deps"
 	@echo "... PlayRec"
+	@echo "... PlayRec-gui"
+	@echo "... PlayRec-gui_autogen/mocs_compilation.o"
+	@echo "... PlayRec-gui_autogen/mocs_compilation.i"
+	@echo "... PlayRec-gui_autogen/mocs_compilation.s"
+	@echo "... PlayRec_autogen/mocs_compilation.o"
+	@echo "... PlayRec_autogen/mocs_compilation.i"
+	@echo "... PlayRec_autogen/mocs_compilation.s"
 	@echo "... src/audio_capture.o"
 	@echo "... src/audio_capture.i"
 	@echo "... src/audio_capture.s"
@@ -343,6 +602,21 @@ help:
 	@echo "... src/file_writer.o"
 	@echo "... src/file_writer.i"
 	@echo "... src/file_writer.s"
+	@echo "... src/gui/capture_thread.o"
+	@echo "... src/gui/capture_thread.i"
+	@echo "... src/gui/capture_thread.s"
+	@echo "... src/gui/main_gui.o"
+	@echo "... src/gui/main_gui.i"
+	@echo "... src/gui/main_gui.s"
+	@echo "... src/gui/main_window.o"
+	@echo "... src/gui/main_window.i"
+	@echo "... src/gui/main_window.s"
+	@echo "... src/gui/preview_widget.o"
+	@echo "... src/gui/preview_widget.i"
+	@echo "... src/gui/preview_widget.s"
+	@echo "... src/gui/settings_dialog.o"
+	@echo "... src/gui/settings_dialog.i"
+	@echo "... src/gui/settings_dialog.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

@@ -8,6 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "" "PlayRec_autogen/timestamp" "custom" "PlayRec_autogen/deps"
+  "/Users/iamkrisk/Documents/playrec/build/PlayRec_autogen/mocs_compilation.cpp" "CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o" "gcc" "CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o.d"
   "/Users/iamkrisk/Documents/playrec/src/audio_capture.cpp" "CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o" "gcc" "CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o.d"
   "/Users/iamkrisk/Documents/playrec/src/capture_engine.cpp" "CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o" "gcc" "CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o.d"
   "/Users/iamkrisk/Documents/playrec/src/encoder.cpp" "CMakeFiles/PlayRec.dir/src/encoder.cpp.o" "gcc" "CMakeFiles/PlayRec.dir/src/encoder.cpp.o.d"

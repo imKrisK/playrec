@@ -54,7 +54,11 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         "onCaptureError",
         "error",
         "onFrameCaptured",
-        "frame"
+        "frame",
+        "onPlayRecording",
+        "onStopPlayback",
+        "onSelectRecordingFile",
+        "onRefreshRecordings"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -86,6 +90,14 @@ template <> constexpr inline auto MainWindow::qt_create_metaobjectdata<qt_meta_t
         QtMocHelpers::SlotData<void(const QImage &)>(14, 2, QMC::AccessPrivate, QMetaType::Void, {{
             { QMetaType::QImage, 15 },
         }}),
+        // Slot 'onPlayRecording'
+        QtMocHelpers::SlotData<void()>(16, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onStopPlayback'
+        QtMocHelpers::SlotData<void()>(17, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onSelectRecordingFile'
+        QtMocHelpers::SlotData<void()>(18, 2, QMC::AccessPrivate, QMetaType::Void),
+        // Slot 'onRefreshRecordings'
+        QtMocHelpers::SlotData<void()>(19, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -120,6 +132,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         case 8: _t->onCaptureStopped(); break;
         case 9: _t->onCaptureError((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1]))); break;
         case 10: _t->onFrameCaptured((*reinterpret_cast< std::add_pointer_t<QImage>>(_a[1]))); break;
+        case 11: _t->onPlayRecording(); break;
+        case 12: _t->onStopPlayback(); break;
+        case 13: _t->onSelectRecordingFile(); break;
+        case 14: _t->onRefreshRecordings(); break;
         default: ;
         }
     }
@@ -144,14 +160,14 @@ int MainWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 11)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 11;
+        _id -= 15;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 11)
+        if (_id < 15)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 11;
+        _id -= 15;
     }
     return _id;
 }

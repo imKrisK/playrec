@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/iamkrisk/Documents/playrec/include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -isystem /opt/homebrew/Cellar/ffmpeg/8.0_1/include
+CXX_INCLUDES = -I/Users/iamkrisk/Documents/playrec/build/PlayRec_autogen/include -I/Users/iamkrisk/Documents/playrec/include -F/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks -isystem /opt/homebrew/Cellar/ffmpeg/8.0_1/include
 
 CXX_FLAGSarm64 = -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wall -Wextra -pedantic -Wno-deprecated-declarations
 

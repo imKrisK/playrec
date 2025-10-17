@@ -95,19 +95,24 @@ bool H264Encoder::initialize(const CaptureSettings& settings,
         return false;
     }
     
-    // Set video codec parameters
-    m_impl->video_codec_context->bit_rate = 2000000; // 2 Mbps
+    // Set video codec parameters using settings
+    m_impl->video_codec_context->bit_rate = settings.videoBitrate;
     m_impl->video_codec_context->width = video_width;
     m_impl->video_codec_context->height = video_height;
-    m_impl->video_codec_context->time_base = {1, 30}; // 30 fps
-    m_impl->video_codec_context->framerate = {30, 1};
+    m_impl->video_codec_context->time_base = {1, settings.frameRate};
+    m_impl->video_codec_context->framerate = {settings.frameRate, 1};
     m_impl->video_codec_context->gop_size = 10;
     m_impl->video_codec_context->max_b_frames = 1;
     m_impl->video_codec_context->pix_fmt = AV_PIX_FMT_YUV420P;
     
-    // Set H.264 specific options
-    av_opt_set(m_impl->video_codec_context->priv_data, "preset", "medium", 0);
-    av_opt_set(m_impl->video_codec_context->priv_data, "crf", "23", 0);
+    // Set H.264 specific options for better compression
+    av_opt_set(m_impl->video_codec_context->priv_data, "preset", "fast", 0);
+    av_opt_set(m_impl->video_codec_context->priv_data, "crf", "28", 0);  // Higher CRF = lower bitrate
+    
+    // Add bitrate control for consistent file sizes
+    m_impl->video_codec_context->bit_rate = 8000000;  // 8 Mbps max
+    m_impl->video_codec_context->rc_max_rate = 10000000;  // 10 Mbps peak
+    m_impl->video_codec_context->rc_buffer_size = 16000000;  // 16 Mbps buffer
     
     // Open video codec
     if (avcodec_open2(m_impl->video_codec_context, video_codec, nullptr) < 0) {
@@ -274,9 +279,25 @@ std::vector<uint8_t> H264Encoder::encode_audio_sample(const AudioSample& sample)
         return result;
     }
     
-    // Convert audio format
+    // Convert audio format with validation
     const uint8_t* src_data[1] = {sample.data.data()};
     int src_samples = sample.data.size() / (m_impl->channels * 2); // 16-bit samples
+    
+    // Validate input audio data to prevent NaN values
+    if (sample.data.empty() || src_samples <= 0) {
+        std::cerr << "Invalid audio sample data" << std::endl;
+        return result;
+    }
+    
+    // Clear the audio frame buffer to prevent leftover data
+    if (av_frame_make_writable(m_impl->audio_frame) < 0) {
+        std::cerr << "Could not make audio frame writable" << std::endl;
+        return result;
+    }
+    
+    // Zero out the audio frame data
+    memset(m_impl->audio_frame->data[0], 0, 
+           m_impl->audio_frame->nb_samples * av_get_bytes_per_sample(AV_SAMPLE_FMT_FLTP) * m_impl->channels);
     
     int converted_samples = swr_convert(m_impl->swr_context,
                                        m_impl->audio_frame->data, m_impl->audio_frame->nb_samples,
@@ -441,12 +462,12 @@ bool H265Encoder::initialize(const CaptureSettings& settings,
         return false;
     }
     
-    // Set video codec parameters (H.265 is more efficient)
-    m_impl->video_codec_context->bit_rate = 1500000; // 1.5 Mbps
+    // Set video codec parameters using settings (H.265 is more efficient)
+    m_impl->video_codec_context->bit_rate = settings.videoBitrate * 0.7; // 30% less for H.265 efficiency
     m_impl->video_codec_context->width = video_width;
     m_impl->video_codec_context->height = video_height;
-    m_impl->video_codec_context->time_base = {1, 30};
-    m_impl->video_codec_context->framerate = {30, 1};
+    m_impl->video_codec_context->time_base = {1, settings.frameRate};
+    m_impl->video_codec_context->framerate = {settings.frameRate, 1};
     m_impl->video_codec_context->gop_size = 10;
     m_impl->video_codec_context->max_b_frames = 1;
     m_impl->video_codec_context->pix_fmt = AV_PIX_FMT_YUV420P;

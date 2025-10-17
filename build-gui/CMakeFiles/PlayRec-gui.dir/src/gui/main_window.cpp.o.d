@@ -1129,4 +1129,10 @@ CMakeFiles/PlayRec-gui.dir/src/gui/main_window.cpp.o: \
   /opt/homebrew/lib/QtCore.framework/Headers/QSettings \
   /opt/homebrew/lib/QtCore.framework/Headers/qsettings.h \
   /opt/homebrew/lib/QtCore.framework/Headers/QDateTime \
-  /Users/iamkrisk/Documents/playrec/build-gui/PlayRec-gui_autogen/include/main_window.moc
+  /opt/homebrew/lib/QtCore.framework/Headers/QDir \
+  /opt/homebrew/lib/QtCore.framework/Headers/QDirIterator \
+  /opt/homebrew/lib/QtCore.framework/Headers/qdiriterator.h \
+  /opt/homebrew/lib/QtCore.framework/Headers/QFileInfo \
+  /opt/homebrew/lib/QtGui.framework/Headers/QDesktopServices \
+  /opt/homebrew/lib/QtGui.framework/Headers/qdesktopservices.h \
+  /opt/homebrew/lib/QtCore.framework/Headers/QUrl

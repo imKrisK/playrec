@@ -69,13 +69,34 @@ include CMakeFiles/PlayRec.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/PlayRec.dir/flags.make
 
+PlayRec_autogen/timestamp: /opt/homebrew/share/qt/libexec/moc
+PlayRec_autogen/timestamp: /opt/homebrew/share/qt/libexec/uic
+PlayRec_autogen/timestamp: CMakeFiles/PlayRec.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --blue --bold --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Automatic MOC and UIC for target PlayRec"
+	/opt/homebrew/bin/cmake -E cmake_autogen /Users/iamkrisk/Documents/playrec/build/CMakeFiles/PlayRec_autogen.dir/AutogenInfo.json Release
+	/opt/homebrew/bin/cmake -E touch /Users/iamkrisk/Documents/playrec/build/PlayRec_autogen/timestamp
+
 CMakeFiles/PlayRec.dir/codegen:
 .PHONY : CMakeFiles/PlayRec.dir/codegen
+
+CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o: CMakeFiles/PlayRec.dir/flags.make
+CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o: PlayRec_autogen/mocs_compilation.cpp
+CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o -MF CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o -c /Users/iamkrisk/Documents/playrec/build/PlayRec_autogen/mocs_compilation.cpp
+
+CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/iamkrisk/Documents/playrec/build/PlayRec_autogen/mocs_compilation.cpp > CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.i
+
+CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/iamkrisk/Documents/playrec/build/PlayRec_autogen/mocs_compilation.cpp -o CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.s
 
 CMakeFiles/PlayRec.dir/src/main.cpp.o: CMakeFiles/PlayRec.dir/flags.make
 CMakeFiles/PlayRec.dir/src/main.cpp.o: /Users/iamkrisk/Documents/playrec/src/main.cpp
 CMakeFiles/PlayRec.dir/src/main.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/PlayRec.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PlayRec.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/src/main.cpp.o -MF CMakeFiles/PlayRec.dir/src/main.cpp.o.d -o CMakeFiles/PlayRec.dir/src/main.cpp.o -c /Users/iamkrisk/Documents/playrec/src/main.cpp
 
 CMakeFiles/PlayRec.dir/src/main.cpp.i: cmake_force
@@ -89,7 +110,7 @@ CMakeFiles/PlayRec.dir/src/main.cpp.s: cmake_force
 CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o: CMakeFiles/PlayRec.dir/flags.make
 CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o: /Users/iamkrisk/Documents/playrec/src/capture_engine.cpp
 CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o -MF CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o.d -o CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o -c /Users/iamkrisk/Documents/playrec/src/capture_engine.cpp
 
 CMakeFiles/PlayRec.dir/src/capture_engine.cpp.i: cmake_force
@@ -103,7 +124,7 @@ CMakeFiles/PlayRec.dir/src/capture_engine.cpp.s: cmake_force
 CMakeFiles/PlayRec.dir/src/video_capture.cpp.o: CMakeFiles/PlayRec.dir/flags.make
 CMakeFiles/PlayRec.dir/src/video_capture.cpp.o: /Users/iamkrisk/Documents/playrec/src/video_capture.cpp
 CMakeFiles/PlayRec.dir/src/video_capture.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/PlayRec.dir/src/video_capture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PlayRec.dir/src/video_capture.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/src/video_capture.cpp.o -MF CMakeFiles/PlayRec.dir/src/video_capture.cpp.o.d -o CMakeFiles/PlayRec.dir/src/video_capture.cpp.o -c /Users/iamkrisk/Documents/playrec/src/video_capture.cpp
 
 CMakeFiles/PlayRec.dir/src/video_capture.cpp.i: cmake_force
@@ -117,7 +138,7 @@ CMakeFiles/PlayRec.dir/src/video_capture.cpp.s: cmake_force
 CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o: CMakeFiles/PlayRec.dir/flags.make
 CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o: /Users/iamkrisk/Documents/playrec/src/audio_capture.cpp
 CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o -MF CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o.d -o CMakeFiles/PlayRec.dir/src/audio_capture.cpp.o -c /Users/iamkrisk/Documents/playrec/src/audio_capture.cpp
 
 CMakeFiles/PlayRec.dir/src/audio_capture.cpp.i: cmake_force
@@ -131,7 +152,7 @@ CMakeFiles/PlayRec.dir/src/audio_capture.cpp.s: cmake_force
 CMakeFiles/PlayRec.dir/src/encoder.cpp.o: CMakeFiles/PlayRec.dir/flags.make
 CMakeFiles/PlayRec.dir/src/encoder.cpp.o: /Users/iamkrisk/Documents/playrec/src/encoder.cpp
 CMakeFiles/PlayRec.dir/src/encoder.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/PlayRec.dir/src/encoder.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/PlayRec.dir/src/encoder.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/src/encoder.cpp.o -MF CMakeFiles/PlayRec.dir/src/encoder.cpp.o.d -o CMakeFiles/PlayRec.dir/src/encoder.cpp.o -c /Users/iamkrisk/Documents/playrec/src/encoder.cpp
 
 CMakeFiles/PlayRec.dir/src/encoder.cpp.i: cmake_force
@@ -145,7 +166,7 @@ CMakeFiles/PlayRec.dir/src/encoder.cpp.s: cmake_force
 CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: CMakeFiles/PlayRec.dir/flags.make
 CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: /Users/iamkrisk/Documents/playrec/src/file_writer.cpp
 CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: CMakeFiles/PlayRec.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/PlayRec.dir/src/file_writer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/PlayRec.dir/src/file_writer.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/PlayRec.dir/src/file_writer.cpp.o -MF CMakeFiles/PlayRec.dir/src/file_writer.cpp.o.d -o CMakeFiles/PlayRec.dir/src/file_writer.cpp.o -c /Users/iamkrisk/Documents/playrec/src/file_writer.cpp
 
 CMakeFiles/PlayRec.dir/src/file_writer.cpp.i: cmake_force
@@ -158,6 +179,7 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.s: cmake_force
 
 # Object files for target PlayRec
 PlayRec_OBJECTS = \
+"CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o" \
 "CMakeFiles/PlayRec.dir/src/main.cpp.o" \
 "CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o" \
 "CMakeFiles/PlayRec.dir/src/video_capture.cpp.o" \
@@ -168,6 +190,7 @@ PlayRec_OBJECTS = \
 # External object files for target PlayRec
 PlayRec_EXTERNAL_OBJECTS =
 
+bin/PlayRec: CMakeFiles/PlayRec.dir/PlayRec_autogen/mocs_compilation.cpp.o
 bin/PlayRec: CMakeFiles/PlayRec.dir/src/main.cpp.o
 bin/PlayRec: CMakeFiles/PlayRec.dir/src/capture_engine.cpp.o
 bin/PlayRec: CMakeFiles/PlayRec.dir/src/video_capture.cpp.o
@@ -183,7 +206,7 @@ bin/PlayRec: /opt/homebrew/Cellar/ffmpeg/8.0_1/lib/libswresample.dylib
 bin/PlayRec: /opt/homebrew/Cellar/ffmpeg/8.0_1/lib/libswscale.dylib
 bin/PlayRec: /opt/homebrew/Cellar/ffmpeg/8.0_1/lib/libavutil.dylib
 bin/PlayRec: CMakeFiles/PlayRec.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking CXX executable bin/PlayRec"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/iamkrisk/Documents/playrec/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable bin/PlayRec"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/PlayRec.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -194,7 +217,7 @@ CMakeFiles/PlayRec.dir/clean:
 	$(CMAKE_COMMAND) -P CMakeFiles/PlayRec.dir/cmake_clean.cmake
 .PHONY : CMakeFiles/PlayRec.dir/clean
 
-CMakeFiles/PlayRec.dir/depend:
+CMakeFiles/PlayRec.dir/depend: PlayRec_autogen/timestamp
 	cd /Users/iamkrisk/Documents/playrec/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/iamkrisk/Documents/playrec /Users/iamkrisk/Documents/playrec /Users/iamkrisk/Documents/playrec/build /Users/iamkrisk/Documents/playrec/build /Users/iamkrisk/Documents/playrec/build/CMakeFiles/PlayRec.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/PlayRec.dir/depend
 

@@ -16,6 +16,9 @@
 #include <QtWidgets/QMessageBox>
 #include <QtWidgets/QSplitter>
 #include <QtCore/QTimer>
+#include <QtCore/QProcess>
+#include <QtMultimedia/QMediaPlayer>
+#include <QtMultimediaWidgets/QVideoWidget>
 #include <memory>
 
 // Forward declarations
@@ -48,20 +51,39 @@ private slots:
     void onCaptureStopped();
     void onCaptureError(const QString& error);
     void onFrameCaptured(const QImage& frame);
+    
+    // Replay functionality
+    void onPlayRecording();
+    void onStopPlayback();
+    void onSelectRecordingFile();
+    void onRefreshRecordings();
+    
+    // Built-in video player
+    void onPauseVideo();
+    void onVideoPositionChanged(qint64 position);
+    void onVideoDurationChanged(qint64 duration);
+    void onVideoStateChanged(QMediaPlayer::PlaybackState state);
+    void onSeekVideo(int position);
 
 private:
     void setupUI();
-    void setupMenuBar();
+    void createMenus();
     void setupStatusBar();
     void setupCentralWidget();
     void setupControlsPanel();
     void setupStatsPanel();
     void setupLogPanel();
+    void setupReplayPanel();
     void updateControls();
     void updateSettings();
     void loadSettings();
     void saveSettings();
     void logMessage(const QString& message);
+    void updateCurrentRecordingInfo();
+    void loadRecordingPreview(const QString& filePath);
+    void setupVideoPlayer();
+    void switchToVideoMode();
+    void switchToPreviewMode();
 
     // UI Components
     QWidget* m_centralWidget;
@@ -102,6 +124,23 @@ private:
     // Log
     QGroupBox* m_logGroup;
     QTextEdit* m_logTextEdit;
+    
+    // Replay Panel
+    QGroupBox* m_replayGroup;
+    QPushButton* m_playButton;
+    QPushButton* m_stopPlaybackButton;
+    QPushButton* m_browseRecordingButton;
+    QPushButton* m_refreshRecordingsButton;
+    QComboBox* m_recordingsComboBox;
+    QLabel* m_currentRecordingLabel;
+    
+    // Built-in Video Player
+    QMediaPlayer* m_mediaPlayer;
+    QVideoWidget* m_videoWidget;
+    QPushButton* m_pauseVideoButton;
+    QLabel* m_playbackTimeLabel;
+    QSlider* m_playbackSlider;
+    bool m_isPlayingVideo;
     
     // Status Bar
     QLabel* m_statusBarLabel;
