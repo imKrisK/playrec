@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎮 PlayRec - Professional Game Capture Application
 
 **A high-performance, cross-platform game capture solution built with modern C++ and FFmpeg**
@@ -6,6 +7,8 @@
 [![Platform](https://img.shields.io/badge/platform-macOS%20%7C%20Windows%20%7C%20Linux-blue.svg)]()
 [![Codec](https://img.shields.io/badge/codec-H.264%20%7C%20H.265-orange.svg)]()
 [![License](https://img.shields.io/badge/license-MIT-green.svg)]()
+
+> A practical tool for content creators, developers, and professionals who need reliable game capture capabilities
 
 ## 🚀 Key Features
 
@@ -302,3 +305,7 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) for details.
 **Built with ❤️ for the gaming and content creation community**
 
 *PlayRec combines the power of FFmpeg with platform-native APIs to deliver professional-grade capture performance in a simple, efficient package.*
+=======
+# playrec
+practical tool for content creators, developers, and professionals who need reliable game capture capabilities
+>>>>>>> 95abf178dea837e52772292351501494cc80b19c
