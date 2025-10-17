@@ -1,0 +1,7 @@
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/PlayRec.dir
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/edit_cache.dir
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/rebuild_cache.dir
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/list_install_components.dir
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/install.dir
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/install/local.dir
+/Users/iamkrisk/Documents/playrec/build/CMakeFiles/install/strip.dir
