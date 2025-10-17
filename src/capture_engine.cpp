@@ -56,10 +56,11 @@ bool CaptureEngine::initialize(const CaptureSettings& settings) {
             return false;
         }
 
-        // Create file writer
-        m_file_writer = std::make_unique<FileWriter>();
-        if (!m_file_writer->open(settings.output_path)) {
-            std::cerr << "Failed to open output file: " << settings.output_path << "\n";
+        // Create MP4 writer for proper container
+        m_mp4_writer = std::make_unique<MP4Writer>();
+        if (!m_mp4_writer->initialize(settings.output_path, width, height, settings.target_fps, 
+                                     sample_rate, channels)) {
+            std::cerr << "Failed to initialize MP4 writer for: " << settings.output_path << "\n";
             return false;
         }
 
@@ -139,12 +140,19 @@ void CaptureEngine::stop_capture() {
     // Finalize encoder and write remaining data
     if (m_encoder) {
         auto final_data = m_encoder->finalize();
-        if (!final_data.empty() && m_file_writer) {
-            m_file_writer->write(final_data);
+        if (!final_data.empty() && m_mp4_writer) {
+            // Write final frames with appropriate timestamps
+            uint64_t final_timestamp = m_stats.frames_captured * 1000 / m_settings.target_fps;
+            m_mp4_writer->write_video_packet(final_data, final_timestamp);
         }
     }
 
-    // Close file
+    // Finalize MP4 container
+    if (m_mp4_writer) {
+        m_mp4_writer->finalize();
+    }
+
+    // Close file writer (if still used for other purposes)
     if (m_file_writer) {
         m_file_writer->close();
     }
@@ -191,15 +199,21 @@ void CaptureEngine::capture_loop() {
 }
 
 void CaptureEngine::process_video_frame(const Frame& frame) {
-    if (!m_encoder || !m_file_writer) {
+    if (!m_encoder || !m_mp4_writer) {
         return;
     }
 
     try {
         auto encoded_data = m_encoder->encode_video_frame(frame);
         if (!encoded_data.empty()) {
-            m_file_writer->write(encoded_data);
-            m_stats.frames_captured++;
+            // Calculate timestamp in milliseconds
+            uint64_t timestamp_ms = m_stats.frames_captured * 1000 / m_settings.target_fps;
+            
+            if (m_mp4_writer->write_video_packet(encoded_data, timestamp_ms)) {
+                m_stats.frames_captured++;
+            } else {
+                m_stats.frames_dropped++;
+            }
         }
     } catch (const std::exception& e) {
         std::cerr << "Error processing video frame: " << e.what() << "\n";
@@ -208,14 +222,21 @@ void CaptureEngine::process_video_frame(const Frame& frame) {
 }
 
 void CaptureEngine::process_audio_sample(const AudioSample& sample) {
-    if (!m_encoder || !m_file_writer) {
+    if (!m_encoder || !m_mp4_writer) {
         return;
     }
 
     try {
         auto encoded_data = m_encoder->encode_audio_sample(sample);
         if (!encoded_data.empty()) {
-            m_file_writer->write(encoded_data);
+            // Calculate timestamp based on audio sample count
+            // Assuming 1024 samples per AAC frame at the sample rate
+            static uint64_t audio_frame_count = 0;
+            uint64_t timestamp_ms = (audio_frame_count * 1024 * 1000) / sample.sample_rate;
+            
+            if (m_mp4_writer->write_audio_packet(encoded_data, timestamp_ms)) {
+                audio_frame_count++;
+            }
         }
     } catch (const std::exception& e) {
         std::cerr << "Error processing audio sample: " << e.what() << "\n";

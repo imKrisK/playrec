@@ -49,6 +49,7 @@ private:
     std::unique_ptr<AudioCapture> m_audio_capture;
     std::unique_ptr<Encoder> m_encoder;
     std::unique_ptr<FileWriter> m_file_writer;
+    std::unique_ptr<MP4Writer> m_mp4_writer;
 
     std::thread m_capture_thread;
     std::atomic<bool> m_is_capturing{false};
