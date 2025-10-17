@@ -2645,6 +2645,7 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: /Users/iamkrisk/Documents/playrec/
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_bounds.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_ctermid.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_locale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_mb_cur_max.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_printf.h \
@@ -3258,6 +3259,7 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: /Users/iamkrisk/Documents/playrec/
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/fstream \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/functional \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/initializer_list \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iomanip \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/ios \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iosfwd \
@@ -3299,6 +3301,7 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: /Users/iamkrisk/Documents/playrec/
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/errno.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/arm/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/limits.h \
@@ -3421,6 +3424,7 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: /Users/iamkrisk/Documents/playrec/
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/___wctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_ctype.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_inttypes.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_stdlib.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_string.h \
@@ -3442,12 +3446,47 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: /Users/iamkrisk/Documents/playrec/
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_rsize_t.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_size_t.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/__stddef_wchar_t.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/17/include/inttypes.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/limits.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/ptrcheck.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stdarg.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stddef.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/17/include/stdint.h \
-  /Users/iamkrisk/Documents/playrec/include/file_writer.h
+  /Users/iamkrisk/Documents/playrec/include/file_writer.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/avcodec.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec_desc.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec_id.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec_par.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/defs.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/packet.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/version.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/version_major.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/avformat.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/avio.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/version.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/version_major.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/attributes.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/avconfig.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/avutil.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/buffer.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/channel_layout.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/common.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/dict.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/error.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/frame.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/hwcontext.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/intfloat.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/log.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/macros.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/mathematics.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/mem.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/opt.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/pixfmt.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/rational.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/samplefmt.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/timestamp.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/version.h
 
 CMakeFiles/PlayRec.dir/src/main.cpp.o: /Users/iamkrisk/Documents/playrec/src/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h \
@@ -6240,6 +6279,8 @@ CMakeFiles/PlayRec.dir/src/video_capture.cpp.o: /Users/iamkrisk/Documents/playre
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/from_range.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/aligned_union.h:
+
+/opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/timestamp.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stddef.h:
 

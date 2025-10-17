@@ -1,0 +1,12 @@
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/PlayRec-gui.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/PlayRec.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/edit_cache.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/rebuild_cache.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/list_install_components.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/install.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/install/local.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/install/strip.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/PlayRec-gui_autogen_timestamp_deps.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/PlayRec-gui_autogen.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/PlayRec_autogen_timestamp_deps.dir
+/Users/iamkrisk/Documents/playrec/build-gui/CMakeFiles/PlayRec_autogen.dir

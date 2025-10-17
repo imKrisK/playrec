@@ -1,0 +1,44 @@
+# Build directories
+build/
+build-gui/
+
+# Video files
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.webm
+
+# Compiled binaries
+*.exe
+*.out
+*.app
+
+# IDE files
+.vscode/
+*.code-workspace
+.idea/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# CMake generated files
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Qt MOC files
+moc_*.cpp
+*_autogen/
+
+# Temporary files
+*.tmp
+*.temp
+*.log

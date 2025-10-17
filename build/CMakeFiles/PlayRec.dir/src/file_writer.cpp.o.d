@@ -813,4 +813,43 @@ CMakeFiles/PlayRec.dir/src/file_writer.cpp.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/path_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/recursive_directory_iterator.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/u8path.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/iostream \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/avformat.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec_par.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/avutil.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/common.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/inttypes.h \
+  /Library/Developer/CommandLineTools/usr/lib/clang/17/include/inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_inttypes.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/xlocale/_inttypes.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/attributes.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/error.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/macros.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/avconfig.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/version.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/mem.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/rational.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/mathematics.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/intfloat.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/log.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/pixfmt.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/channel_layout.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec_id.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/samplefmt.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/version_major.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/defs.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/packet.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/buffer.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/dict.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/avio.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/version_major.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavformat/version.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/frame.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/hwcontext.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/avcodec.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/version.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavcodec/codec_desc.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/opt.h \
+  /opt/homebrew/Cellar/ffmpeg/8.0_1/include/libavutil/timestamp.h
